@@ -1,11 +1,17 @@
 import pickle
 import streamlit as st
 import numpy as np
+# Ensure sklearn is installed
 try:
     import sklearn
-    st.write(f"scikit-learn version: {sklearn.__version__}")
 except ModuleNotFoundError as e:
-    st.error(f"ModuleNotFoundError: {e}")
+    st.error(f"ModuleNotFoundError: {e}. Please install scikit-learn by adding it to your requirements.txt file.")
+
+# Membaca model
+try:
+    pokemon_model = pickle.load(open('Pokemon_model.sav', 'rb'))
+except FileNotFoundError:
+    st.error("Model file not found. Ensure 'Pokemon_model.sav' is in the same directory as 'app.py'.")
 
 # Membaca model
 pokemon_model = pickle.load(open('Pokemon_model.sav', 'rb'))
